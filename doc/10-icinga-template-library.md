@@ -736,7 +736,7 @@ http_link                        | **Optional.** Wrap output in HTML link. Defau
 http_verbose                     | **Optional.** Show details for command-line debugging. Defaults to false.
 http_verify_host                 | **Optional.** Verify SSL certificate is for the -H hostname (with --sni and -S). Defaults to false. **Only supported by the Nagios plugins version of check\_http, not by the monitoring plugins one.**
 
-### http <a id="plugin-check-command-curl"></a>
+### curl <a id="plugin-check-command-curl"></a>
 
 The [check_curl](https://www.monitoring-plugins.org/doc/man/check_curl.html) plugin
 tests the HTTP service on the specified host. It can test normal (http) and secure
