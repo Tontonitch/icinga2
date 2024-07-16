@@ -736,6 +736,65 @@ http_link                        | **Optional.** Wrap output in HTML link. Defau
 http_verbose                     | **Optional.** Show details for command-line debugging. Defaults to false.
 http_verify_host                 | **Optional.** Verify SSL certificate is for the -H hostname (with --sni and -S). Defaults to false. **Only supported by the Nagios plugins version of check\_http, not by the monitoring plugins one.**
 
+### http <a id="plugin-check-command-curl"></a>
+
+The [check_curl](https://www.monitoring-plugins.org/doc/man/check_curl.html) plugin
+tests the HTTP service on the specified host. It can test normal (http) and secure
+(https) servers, follow redirects, search for strings and regular expressions,
+check connection times, and report on certificate expiration times.
+
+The plugin can either test the HTTP response of a server, or if `curl_certificate` is set to a non-empty value, the TLS certificate age for a HTTPS host.
+
+Custom variables passed as [command parameters](03-monitoring-basics.md#command-passing-parameters):
+
+Name                             | Description
+---------------------------------|---------------------------------
+curl_address                     | **Optional.** The host's address. Defaults to "$address$" if the host's `address` attribute is set, "$address6$" otherwise.
+curl_vhost                       | **Optional.** The virtual host that should be sent in the "Host" header.
+curl_uri                         | **Optional.** The request URI for GET or POST. Defaults to `/`.
+curl_port                        | **Optional.** The TCP port. Defaults to 80 when not using SSL, 443 otherwise.
+curl_ssl                         | **Optional.** Whether to use SSL. Defaults to false.
+curl_ssl_force_tlsv1             | **Optional.** Whether to force TLSv1.
+curl_ssl_force_tlsv1_1           | **Optional.** Whether to force TLSv1.1.
+curl_ssl_force_tlsv1_2           | **Optional.** Whether to force TLSv1.2.
+curl_ssl_force_sslv2             | **Optional.** Whether to force SSLv2.
+curl_ssl_force_sslv3             | **Optional.** Whether to force SSLv3.
+curl_ssl_force_tlsv1_or_higher   | **Optional.** Whether to force TLSv1 or higher.
+curl_ssl_force_tlsv1_1_or_higher | **Optional.** Whether to force TLSv1.1 or higher.
+curl_ssl_force_tlsv1_2_or_higher | **Optional.** Whether to force TLSv1.2 or higher.
+curl_ssl_force_sslv2_or_higher   | **Optional.** Whether to force SSLv2 or higher.
+curl_ssl_force_sslv3_or_higher   | **Optional.** Whether to force SSLv3 or higher.
+curl_sni                         | **Optional.** Whether to use SNI. Defaults to false.
+curl_auth_pair                   | **Optional.** Add 'username:password' authorization pair.
+curl_proxy_auth_pair             | **Optional.** Add 'username:password' authorization pair for proxy.
+curl_ignore_body                 | **Optional.** Don't download the body, just the headers.
+curl_linespan                    | **Optional.** Allow regex to span newline.
+curl_expect_body_regex           | **Optional.** A regular expression which the body must match against. Incompatible with curl_ignore_body.
+curl_expect_body_eregi           | **Optional.** A case-insensitive expression which the body must match against. Incompatible with curl_ignore_body.
+curl_invertregex                 | **Optional.** Changes behavior of curl_expect_body_regex and curl_expect_body_eregi to return CRITICAL if found, OK if not.
+curl_warn_time                   | **Optional.** The warning threshold.
+curl_critical_time               | **Optional.** The critical threshold.
+curl_expect                      | **Optional.** Comma-delimited list of strings, at least one of them is expected in the first (status) line of the server response. Default: HTTP/1.
+curl_certificate                 | **Optional.** Minimum number of days a certificate has to be valid. Port defaults to 443. When this option is used the URL is not checked. The first parameter defines the warning threshold (in days), the second parameter the critical threshold (in days). (Example `curl_certificate = "30,20"`).
+curl_clientcert                  | **Optional.** Name of file contains the client certificate (PEM format).
+curl_privatekey                  | **Optional.** Name of file contains the private key (PEM format).
+curl_headerstring                | **Optional.** String to expect in the response headers.
+curl_string                      | **Optional.** String to expect in the content.
+curl_post                        | **Optional.** URL encoded http POST data.
+curl_method                      | **Optional.** Set http method (for example: HEAD, OPTIONS, TRACE, PUT, DELETE).
+curl_maxage                      | **Optional.** Warn if document is more than seconds old.
+curl_contenttype                 | **Optional.** Specify Content-Type header when POSTing.
+curl_useragent                   | **Optional.** String to be sent in http header as User Agent.
+curl_header                      | **Optional.** Any other tags to be sent in http header. Can be an array if multiple headers should be passed to `check_curl`.
+curl_extendedperfdata            | **Optional.** Print additional perfdata. Defaults to false.
+curl_onredirect                  | **Optional.** How to handle redirect pages. Possible values: "ok" (default), "warning", "critical", "follow", "sticky" (like follow but stick to address), "stickyport" (like sticky but also to port)
+curl_pagesize                    | **Optional.** Minimum page size required:Maximum page size required.
+curl_timeout                     | **Optional.** Seconds before connection times out.
+curl_ipv4                        | **Optional.** Use IPv4 connection. Defaults to false.
+curl_ipv6                        | **Optional.** Use IPv6 connection. Defaults to false.
+curl_link                        | **Optional.** Wrap output in HTML link. Defaults to false.
+curl_verbose                     | **Optional.** Show details for command-line debugging. Defaults to false.
+curl_verify_host                 | **Optional.** Verify SSL certificate is for the -H hostname (with --sni and -S). Defaults to false. **Only supported by the Nagios plugins version of check\_curl, not by the monitoring plugins one.**
 
 ### icmp <a id="plugin-check-command-icmp"></a>
 
